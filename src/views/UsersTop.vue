@@ -21,7 +21,7 @@
           <button
             type="button"
             class="btn btn-danger"
-            @click.stop.prevent="deleteFollow"
+            @click.stop.prevent="deleteFollow(user)"
             v-if="user.isFollowed"
           >
             取消追蹤
@@ -29,7 +29,7 @@
           <button
             type="button"
             class="btn btn-primary"
-            @click.stop.prevent="addFollow"
+            @click.stop.prevent="addFollow(user)"
             v-else
           >
             追蹤
@@ -94,7 +94,8 @@ export default {
   data() {
     return {
       users: [],
-      user: this.initialUser,
+      // user: this.initialUser,
+      // key: this.key,
     };
   },
   created() {
@@ -105,24 +106,16 @@ export default {
       const { users } = dummyUser;
       this.users = users;
     },
-    deleteFollow() {
-      this.user = {
-        ...this.user,
-        isFollowed: false,
-      };
+    deleteFollow(targetUser) {
+      this.currentUser = this.users[targetUser.id - 1];
+      console.log(this.currentUser);
+      this.currentUser.isFollowed = false;
     },
-    addFollow() {
-      this.user = {
-        ...this.user,
-        isFollowed: true,
-      };
+    addFollow(targetUser) {
+      this.currentUser = this.users[targetUser.id - 1];
+      console.log(this.currentUser);
+      this.currentUser.isFollowed = true;
     },
   },
-  // methods: {
-  //   fetchUsers() {
-  //     const { users } = dummyUser;
-  //     this.users = users;
-  //   },
-  // },
 };
 </script>

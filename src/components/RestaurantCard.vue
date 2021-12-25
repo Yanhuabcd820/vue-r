@@ -72,12 +72,14 @@ export default {
   },
   methods: {
     addFavorite() {
+      console.log(this.restaurant);
       this.restaurant = {
         ...this.restaurant,
         isFavorited: true,
       };
     },
     deleteFavorite() {
+      console.log(this.restaurant);
       this.restaurant = {
         ...this.restaurant,
         isFavorited: false,
