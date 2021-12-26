@@ -106,16 +106,35 @@ export default {
       const { users } = dummyUser;
       this.users = users;
     },
+    // deleteFollow(targetUser) {
+    //   this.currentUser = this.users[targetUser.id - 1];
+    //   console.log(this.currentUser);
+    //   this.currentUser.isFollowed = false;
+    // },
     deleteFollow(targetUser) {
-      this.currentUser = this.users[targetUser.id - 1];
-      console.log(this.currentUser);
-      this.currentUser.isFollowed = false;
+      this.users = this.users.map((user) => {
+        //user 指的是 this.users 中的一筆資料
+        return {
+          ...user,
+          //user 指的是 this.users 中的一筆資料
+          isFollowed: targetUser.id === user.id ? false : user.isFollowed,
+          //如果targetUser. id 等於 user.id 表示是這次要異動的該筆資料，如果是則將 isFollowed 改為 false, 不是則維持原本的值。
+        };
+      });
     },
     addFollow(targetUser) {
-      this.currentUser = this.users[targetUser.id - 1];
-      console.log(this.currentUser);
-      this.currentUser.isFollowed = true;
+      this.users = this.users.map((user) => {
+        return {
+          ...user,
+          isFollowed: targetUser.id === user.id ? true : user.isFollowed,
+        };
+      });
     },
+    // addFollow(targetUser) {
+    //   this.currentUser = this.users[targetUser.id - 1];
+    //   console.log(this.currentUser);
+    //   this.currentUser.isFollowed = true;
+    // },
   },
 };
 </script>
